@@ -1,0 +1,151 @@
+VIDEO
+https://www.youtube.com/watch?v=hnC8iSehFSM&list=PLbghT7MmckI4_VM5q3va043FgAwRim6yX&index=2%7D
+
+PROBLEM
+		- google topic: state switch case		https://www.google.com/search?q=unity+enum+switch&oq=unity+enum+switch&aqs=chrome..69i57j0l2.11103j0j7&sourceid=chrome&ie=UTF-8
+
+		- MINDFUCK - imam dojam da sam sve sjebo i zakompiocirao si zivot
+			-	makni svjetla iz skripte za sad, i gasi pokusna svjetla iz insoektora, inspektora
+			-	kako dodati emission skriptom
+			-	namjestao sam postprocessing al sam zasro, nadji onaj video kako nova verzija funkcionira
+
+			OSTAVI SCENU  kak je sve sad namjesteno, izgleda fora, napravi nesta od togS
+
+
+		BUG
+
+
+
+		TODO
+		- ZADNJE STA SAM RADIO, brija sa kamerom u worlcontroller.cs, probaj od toga napravit nesta pametno
+		- nariktaj timer scalea
+
+		- prebaci mehaniku repa u novu metodu
+			tek toliko da comp ne cita sva ta sranja svaki put kada pomicemo tipa
+		- powerUp system
+		- kada pojedemo igraca preokreni mu (ili im) komande
+		- sound manager
+		-glavni izbornik
+			-	how to play
+		- dodati / napraviti sistem bodova	//	nije jos gotov
+		- particles
+		- tailovi naa pocetku igre moraju biti iskljuceni i namjesteni na nulu
+		- provjeri kako kamera radi kada mjenjamo perspective i octographic ( u worldcontroller skipti, start)
+		 - IDEJA, neka je timer varijabla globalna, tako mogu dodati powerup koji ubrzava kretnju (smanjuje coroutinu)
+			-	Controller.cs, dodaj varijablu powerUp, ne znam kojeg tipa bi bila, ... ma zaboravi, izgubio sam se
+
+			                //  TODO dodaj zvuk zderanja
+            //   TODO   dodaj zvuk micanja
+            // pokrece se "animacija", povecavanje scalea 
+		- NOVA MEHANIKA - vidi dolje pod IDEJE, 
+
+
+		DONE
+
+		- rep igracima?
+		- vidi pod BUG, iteracija repa
+		- pomicanje na timer
+		- odredi "chunkove"
+		- brija sa kamerom (vidi pod IDEJA)
+		-	PREPRAVI	- controller.cs namjesti komande()
+		- prebaci tileswitchcase() u Tile skriptu, metodu zovi iz onog tilestate setera
+		- scale "animacija", lerpom ili Ienumeratorom ili nesta
+		- glede random komandi, napravi metodu pravilnih komandi, cisto zbog testiranja kako bi igra disala i 
+				koliko su random komande zamorne
+		-	PRIORITET - rjesi mehaniku kak da te svjetlo prati, sklepaj ako treba
+		- dodaj light igracima, namjesti boju i neka se light pomice na igraceve koordinate
+			- BUG,  light ostaje nakon sta pojedemo igraca, ispravi
+			- DOJAM, ruzno izgleda, napraviti barem fade in svaki put (lerpom?), mooozda i move to position 
+			- prouci malo temu o lightingu i o materijalima
+
+			-	https://www.youtube.com/watch?v=owZneI02YOU
+			-	https://www.youtube.com/watch?v=wwm98VdzD8s
+		
+		
+
+		IDEJA
+			- neka skripta na kameri nadje x i y worlda i neka se sama pozicionira na X : 2 , Y : 2 (podjeljeno sa 2)
+
+			- REP
+				- Razlog
+					- ako oba igraca imaju rep, kako da on raste i u cemu je smisao?
+						- mozda da ne bude borbe, mozda napraviti mod utrke? svaki igrac mora pokupiti odredjeni powerup, 
+						  plavi kupi plavi powerup, crveni crveni. Powerupovi se pojavljuju u kucicama koje se random generiraju
+						  skupa sa preprekama. Tail usporava protivnika (npr. na 5 "poteza" ili klikova).
+						  (NOVA MEHANIKA, TESKO DA BI BILO IZVEDIVO)
+				- brija
+					-	combat mode
+						- igraci imaju tailLength = 0;
+						- kada izgubis dobivas rep i tailCount++
+							- da luzer dobije malu prednost
+						- tail usporava protivnika za-1 potez
+						- pali se timer, ako se za 20 sekundi ne desi "zderanje", tj ako igrac sa tailom samo bjezi igra je gotova
+							-	cisto da se izbjegne nezrelo trollanje, igrac bi mogao bjezat u nedogled
+						- 
+
+
+			- FIRE POWERUP
+				-	igrac koji nema rep, kada ga pokupi moze zapaliti protivnikov rep, gori svake 0.25f prema igracu npr 6 polja (ovisi o lengthu taila)
+				- pitanje - sta kada ga pokupi onaj koji ima tail? cijeli rep gori? 
+
+			- NOVA IGRA
+				-	ime : utrka kroz krivudavi put
+				-	sirina mape : 15
+				-	playeri se nalaze na sredini otprilike, width / 3 valjda
+				-	pred njima je krivudavi put koji moraju sljediti na random komandama, sa svake strane
+					su prikazane slike komandi, PROBLEM KOJI DO SADA NISAM NAPRAVIO KAK SPADA
+				-	put je odgovarajuci TileState
+				-	ako player stane na krivo/empty polje vraca se na pocetak, start poziciju
+				-	tko prvi do cilja pobjednik
+
+				-	PROBLEM - kako generirati put
+					-	imam neku briju, dakle napravi novu scenu sa novim worldom i tileom, smisli neki random algoritmic
+						koji
+						prvi put ide gore za random 
+						drugi put jel ide ljevo ili desno i za koliko
+						treci put opet ravno, pa opet bira smjer i tako u tom nizu sve dok ne dodje do kraja odnosno lenghta visine
+
+				-	dodatna ideja
+					ona brija da level ide u nedogled, kamera se pomice gore skupa sa igracima, i nemam pojma
+						izgubio sam misao/poantu
+						uglavnom razradi ideju
+				
+
+
+		EVENT SYSTEM
+			https://www.youtube.com/watch?v=DWtbNWMrOTM&list=PLbghT7MmckI4_VM5q3va043FgAwRim6yX&index=3
+			- pogledaj video pdprilike na 4:00
+
+
+
+			MEHANIKA
+			kretanjem igraca po tileovima utjecemo na
+
+			state
+
+			promjena statea statea utjecemo na
+
+			boju
+			scale
+			hm...
+
+
+		HINTS
+	
+			-	sto se tice dodavanja texta skriptom
+				-	https://stackoverflow.com/questions/34734207/unity-4-6-creating-text-through-a-script
+
+
+		RJESENI PROBLEMI
+				Coroutina iz non monobehavioura
+			-	dobar link
+			-	https://answers.unity.com/questions/161084/coroutine-without-monobehaviour.html
+			-	citaba
+			-	https://forum.unity.com/threads/running-startcoroutine-from-a-non-monobehaviour.233817/
+			
+			-alt solucija
+				-	vrati na staro, kak je bilo. Volio bi da sam napravio backup, jbg sad
+				-	neka se koroutina poziva na playerov move ili nesta slicno
+					-	dakle playerScale = 0
+					-	vrti sve dok playerscale < Tile[x,y] 
+					-	bit ce problema sa prvim frameom pretrpostavljam al jbg
